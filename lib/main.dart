@@ -6,6 +6,6 @@ import 'package:flutter/material.dart';
 import 'ui/ios/cupertino-app.dart';
 
 void main() {
-  // runApp(const MyMaterialApp());
-  runApp(const MyCupertinoApp());
+  runApp(const MyMaterialApp());
+  // runApp(const MyCupertinoApp());
 }
