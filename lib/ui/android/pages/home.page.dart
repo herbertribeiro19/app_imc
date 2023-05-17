@@ -1,3 +1,4 @@
+import 'package:app_imc/blocs/imc.bloc.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -8,11 +9,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  var bloc = ImcBloc();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // ignore: prefer_const_constructors
         title: Text("Calculo de IMC"),
       ),
       body: Container(
@@ -20,7 +21,6 @@ class _HomePageState extends State<HomePage> {
         child: ListView(
           children: <Widget>[
             Padding(
-              // ignore: prefer_const_constructors
               padding: EdgeInsets.only(
                 top: 70,
                 left: 20,
@@ -28,53 +28,48 @@ class _HomePageState extends State<HomePage> {
                 bottom: 20,
               ),
               child: TextFormField(
+                controller: bloc.heightCtrl,
                 decoration: const InputDecoration(
                   labelText: "Altura (cm)",
                 ),
                 keyboardType: TextInputType.number,
               ),
             ),
-            // ignore: prefer_const_constructors
             SizedBox(
               height: 5,
             ),
             Padding(
-              // ignore: prefer_const_constructors
               padding: EdgeInsets.all(20),
               child: TextFormField(
-                // ignore: prefer_const_constructors
-                decoration: const InputDecoration(
+                controller: bloc.weightCtrl,
+                decoration: InputDecoration(
                   labelText: "Peso (kg)",
                 ),
                 keyboardType: TextInputType.number,
               ),
             ),
-            // ignore: prefer_const_constructors
             Padding(
-              // ignore: prefer_const_constructors
               padding: EdgeInsets.all(20),
-              child: const Text(
-                "Você está em forma!",
+              child: Text(
+                bloc.result,
                 textAlign: TextAlign.center,
               ),
             ),
-            // ignore: prefer_const_constructors
             SizedBox(
               height: 10,
             ),
-            // ignore: prefer_const_constructors
             Padding(
-              // ignore: prefer_const_constructors
               padding: EdgeInsets.all(20),
               child: TextButton(
-                onPressed: () {},
-                // ignore: prefer_const_constructors
+                onPressed: () {
+                  setState(() {
+                    bloc.calculate();
+                  });
+                },
                 style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all(Colors.red)),
-                // ignore: prefer_const_constructors
                 child: Text(
                   "Calcular",
-                  // ignore: prefer_const_constructors
                   style: TextStyle(
                     color: Colors.white,
                   ),
